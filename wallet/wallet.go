@@ -1,6 +1,9 @@
 package wallet
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 type Wallet struct {
 	balance Bitcoin
@@ -26,6 +29,15 @@ func (w *Wallet) Balance() Bitcoin {
 	return w.balance
 }
 
-func (w *Wallet) Withdraw(amount Bitcoin) {
+// 在 Go 中，错误是值，因此我们可以将其重构为一个变量，并为其提供一个单一的事实来源。
+
+var InsufficientFundsError = errors.New("cannot withdraw, insufficient funds")
+
+func (w *Wallet) Withdraw(amount Bitcoin) error {
+	if amount > w.balance {
+		return InsufficientFundsError
+	}
 	w.balance -= amount
+	return nil
+
 }
