@@ -1,7 +1,12 @@
 package dependencyinjection
 
-import "bytes"
+import (
+	"bytes"
+	"fmt"
+)
 
-func Greet(b *bytes.Buffer, s string) {
+func Greet(writer *bytes.Buffer, name string) {
+
+	fmt.Printf("Hello, %s", name)
 
 }
