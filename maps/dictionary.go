@@ -1,6 +1,12 @@
 package maps
 
-func Search(dictionary map[string]string, s string) interface{} {
+type Dictionary map[string]string
 
-	return "!!!"
+func (d Dictionary) Search(word string) string {
+
+	return d[word]
+}
+
+func Search(dictionary map[string]string, word string) string {
+	return dictionary[word]
 }
