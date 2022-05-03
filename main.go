@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/willie-lin/Go_With_Test/mocking"
 	"os"
+	"time"
 )
 
 func main() {
@@ -10,5 +11,6 @@ func main() {
 
 	//http.ListenAndServe(":5000", http.HandlerFunc(dependencyinjection.MyGreeterHandler))
 
-	mocking.Countdown(os.Stdout)
+	sleeper := &mocking.ConfigurableSleeper{1 * time.Second}
+	mocking.Countdown(os.Stdout, sleeper)
 }
