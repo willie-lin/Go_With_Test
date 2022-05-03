@@ -33,3 +33,19 @@ type SpySleeper struct {
 func (s *SpySleeper) Sleep() {
 	s.Calls++
 }
+
+type CountdownOperationsSpy struct {
+	Calls []string
+}
+
+const write = "write"
+const sleep = "sleep"
+
+func (s *CountdownOperationsSpy) Sleep() {
+	s.Calls = append(s.Calls, sleep)
+}
+
+func (s *CountdownOperationsSpy) Write(p []byte) (n int, err error) {
+	s.Calls = append(s.Calls, write)
+	return
+}
