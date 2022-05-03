@@ -6,11 +6,19 @@ import (
 	"time"
 )
 
+type ConfigurableSleeper struct {
+	duration time.Duration
+}
+
+func (o *ConfigurableSleeper) Sleep() {
+	time.Sleep(o.duration)
+}
+
 func main() {
 	//dependencyinjection.Greet(os.Stdout, "Elodie")
 
 	//http.ListenAndServe(":5000", http.HandlerFunc(dependencyinjection.MyGreeterHandler))
 
-	sleeper := &mocking.ConfigurableSleeper{1 * time.Second}
+	sleeper := &ConfigurableSleeper{1 * time.Second}
 	mocking.Countdown(os.Stdout, sleeper)
 }

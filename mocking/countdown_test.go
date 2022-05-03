@@ -11,7 +11,7 @@ func TestCountdown(t *testing.T) {
 
 	spySleeper := &SpySleeper{}
 
-	Countdown(buffer)
+	Countdown(buffer, spySleeper)
 
 	got := buffer.String()
 	want := `3

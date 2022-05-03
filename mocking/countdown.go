@@ -3,7 +3,6 @@ package mocking
 import (
 	"fmt"
 	"io"
-	"time"
 )
 
 const findWord = "Go!"
@@ -21,14 +20,6 @@ func Countdown(out io.Writer, sleeper Sleeper) {
 	}
 	sleeper.Sleep()
 	fmt.Fprint(out, findWord)
-}
-
-type ConfigurableSleeper struct {
-	duration time.Duration
-}
-
-func (o *ConfigurableSleeper) Sleep() {
-	time.Sleep(o.duration)
 }
 
 type Sleeper interface {
