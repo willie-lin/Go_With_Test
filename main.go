@@ -1,24 +1,14 @@
 package main
 
 import (
-	"github.com/willie-lin/Go_With_Test/mocking"
-	"os"
-	"time"
+	"github.com/willie-lin/Go_With_Test/app"
+	"log"
+	"net/http"
 )
 
-type ConfigurableSleeper struct {
-	duration time.Duration
-}
-
-func (o *ConfigurableSleeper) Sleep() {
-	time.Sleep(o.duration)
-}
-
 func main() {
-	//dependencyinjection.Greet(os.Stdout, "Elodie")
-
-	//http.ListenAndServe(":5000", http.HandlerFunc(dependencyinjection.MyGreeterHandler))
-
-	sleeper := &ConfigurableSleeper{1 * time.Second}
-	mocking.Countdown(os.Stdout, sleeper)
+	handler := http.HandlerFunc(app.PlayerServer)
+	if err := http.ListenAndServe(":5000", handler); err != nil {
+		log.Fatalf("could not listen on port 5000 %v", err)
+	}
 }
